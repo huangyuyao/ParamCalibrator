@@ -28,7 +28,6 @@ private:
 ParamModel::ParamModel(vector<string> keys, QObject *parent) : QAbstractTableModel(parent)
 {
     int row = 0;
-    printf("keys.size()=%d\n", keys.size());fflush(0);
     nameTable.reserve(keys.size());
     typeTable.reserve(keys.size());
     valueTable.reserve(keys.size());
@@ -36,13 +35,11 @@ ParamModel::ParamModel(vector<string> keys, QObject *parent) : QAbstractTableMod
         QStringList list = QString::fromStdString(key).split(QChar('|'));
         QString varname = list.at(0);
         QString vartype = list.at(1);
-        printf("row=%d\n",row);fflush(0);
         nameTable.push_back(varname);
         typeTable.push_back(vartype);
         valueTable.push_back(0);
         rowMap[varname] = row++;
     }
-    printf("model init ok\n");fflush(0);
     modifyBufferLock = false;
 }
 
