@@ -20,6 +20,7 @@ int main()
 
     while(1){
         printf("iv=%d\tbv=%d\tdv=%f\n", iv, bv, dv);
+        dv+=0.0001;
         Sleep(2000);
     }
 

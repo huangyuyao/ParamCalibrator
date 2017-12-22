@@ -50,7 +50,7 @@ int ParamModel::rowCount(const QModelIndex &parent) const
 
 int ParamModel::columnCount(const QModelIndex &parent) const
 {
-    return 3;
+    return 4;
 }
 
 QVariant ParamModel::data(const QModelIndex &index, int role) const
@@ -62,6 +62,8 @@ QVariant ParamModel::data(const QModelIndex &index, int role) const
             return QVariant(nameTable[index.row()]);
         else if(index.column() == 2)
             return QVariant(valueTable[index.row()]);
+        else if(index.column() == 3)
+            return QVariant(QString::fromStdString(""));
     }
     return QVariant();
 }
@@ -81,7 +83,7 @@ bool ParamModel::setData(const QModelIndex &index, const QVariant &value, int ro
 
 Qt::ItemFlags ParamModel::flags(const QModelIndex &index) const
 {
-    if (index.column() == 2)
+    if (index.column() == 3)
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
     else
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
@@ -101,6 +103,9 @@ void ParamModel::update(ParamSync &data)
     for(ParamSync::iterator item = data.begin(); item != data.end(); ++item){
         valueTable[rowMap[QString::fromStdString(item->first)]] = item->second;
     }
+    static QModelIndex topleft = createIndex(0, 2);
+    static QModelIndex btmrght = createIndex(data.size()-1, 2);
+    emit dataChanged(topleft, btmrght);
 }
 
 #include <QApplication>
@@ -125,6 +130,7 @@ void UserPanel::exec(vector<string> keys)
 {
     int argc = 0;
     QApplication a(argc, NULL);
+    qRegisterMetaType<QVector<int> >("QVector<int>");
     model = new ParamModel(keys);
     QTableView view;
     view.setModel(model);
