@@ -130,6 +130,7 @@ void UserPanel::exec(vector<string> keys)
 {
     int argc = 0;
     QApplication a(argc, NULL);
+    QApplication::addLibraryPath("platforms");
     qRegisterMetaType<QVector<int> >("QVector<int>");
     model = new ParamModel(keys);
     QTableView view;
