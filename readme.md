@@ -2,6 +2,14 @@
 
 This library provide a GUI (based on Qt) so that a user can edit variables in the memory of the caller program. All you need to do is to include the header files in your project and make use of the provided dlls .
 
+### Download
+
+Please refer [release page](https://github.com/huangyuyao/ParamCalibrator/releases) of this repo to download the latest version.
+
+### Install Guide
+
+Please refer [wiki page](https://github.com/huangyuyao/ParamCalibrator/wiki) of this repo to figure out how to configure these DLLs into your Visual Studio Project.
+
 ### Usage
 
 ```c++
